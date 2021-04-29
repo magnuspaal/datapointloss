@@ -234,7 +234,7 @@ def loss_bins(y_true, p_pred, x=None, w=default, target=0, bins=100):
   """ 
 
   if X is None:
-  x = np.linspace(0.000,1.000,1001).tolist()
+    x = np.linspace(0.000,1.000,1001).tolist()
   
   probs = []
   if target == 0:
