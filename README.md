@@ -29,3 +29,9 @@ Samuti saab ka pydoc'i kasutades uurida iga funktsiooni ja klassi dokumentatsioo
 ```
 pydoc datapointloss.functions.brier_curve
 ```
+
+## Maha installimine
+Teegi saab maha insallida käsuga:
+```
+pip uninstall datapointloss
+```
