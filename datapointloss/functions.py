@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.legend_handler import HandlerTuple
 
-default_x = np.linspace(0.000,1.000,1001).tolist()
-
 def default(c):
   """ 
   Kaal, mis korrutatakse keskmise hinnaga. Erinevad kaalud 
@@ -23,7 +21,7 @@ def default(c):
   """ 
   return 1
 
-def brier_curve(y_true, p_pred, w=default, x=default_x):
+def brier_curve(y_true, p_pred, w=default, x=None):
   """ 
   Funktsioon, mis joonistab Brier'i kõvera.
 
@@ -43,6 +41,9 @@ def brier_curve(y_true, p_pred, w=default, x=default_x):
     numpy.ndarray y_space: Kõikidel x-i, ehk c väärtustel oleva keskmise 
     hinna w(c) * L(c, 1-c) järjendina.
   """ 
+  if X is None:
+    x = np.linspace(0.000,1.000,1001).tolist()
+
   y_space = np.array([])
   n = len(p_pred)
   for c in x:
@@ -130,7 +131,7 @@ class Feature:
           self.names = list(values.values())
           self.values = list(values.keys())
 
-def curve_areas(X_test, y_true, p_pred, x=default_x, w=default, targets=[0], feature=None):
+def curve_areas(X_test, y_true, p_pred, x=None, w=default, targets=[0], feature=None):
   """ 
   Funktsioon, mis joonistab iga andmepunkti panustatud pindala kaos ja
   väljastab matplotlib ploti.
@@ -153,6 +154,9 @@ def curve_areas(X_test, y_true, p_pred, x=default_x, w=default, targets=[0], fea
     datapointloss.functions.Feature feature: Tunnuse klass, et eraldada erinevate
       tunnustega admepunktid. Lähemalt loe klassi kirjeldusest.
   """ 
+  if X is None:
+    x = np.linspace(0.000,1.000,1001).tolist()
+
   copy = X_test.copy()
   copy['prob'] = p_pred
 
@@ -208,7 +212,7 @@ def curve_areas(X_test, y_true, p_pred, x=default_x, w=default, targets=[0], fea
   
       plt.legend(value_labels, values, handler_map={tuple: HandlerTuple(ndivide=None)})
 
-def loss_bins(y_true, p_pred, x=default_x, w=default, target=0, bins=100):
+def loss_bins(y_true, p_pred, x=None, w=default, target=0, bins=100):
   """ 
   Funktsioon, mis joonistab iga andmepunkti panustatud pindala kaos tulpdiagrammina.
 
@@ -228,8 +232,11 @@ def loss_bins(y_true, p_pred, x=default_x, w=default, target=0, bins=100):
     int bins: Mitmeks hindade suhte piirkonda andmepunktid jaotatakse 
       tulpadesse.
   """ 
+
+  if X is None:
+  x = np.linspace(0.000,1.000,1001).tolist()
   
-  prrobs = []
+  probs = []
   if target == 0:
       probs = np.sort(p_pred[y_true == 0])
   elif target == 1:
