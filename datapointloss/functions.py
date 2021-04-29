@@ -27,13 +27,16 @@ def brier_curve(y_true, p_pred, w=default, x=None):
 
   Argumendid:
     numpy.ndarray y_true: Andmepunktide tegelikud väärtused.
+
     numpy.ndarray p_pred: Andmepunktidele ennustatud positiivse klassi 
       tõenäosus.
+
     function w: Funktsioon, mis annab iga hindade suhte juures kaalu. Ehk
       millega korrutatkse keskmine hind iga hinna suhte juures läbi.
       Erinevad kaalud annavad kõveraid, mille alune pindala on erinev
       rangelt korralik kadu. Siin on kaasas kaalud default(c), brier(c)
       ja cross_entropy(c).
+
     list x: y_teljel olevate hindade suhted. Tavaline väärtus on 0ist 
       1ni 1000 osaks jaotatud.
 
@@ -41,7 +44,7 @@ def brier_curve(y_true, p_pred, w=default, x=None):
     numpy.ndarray y_space: Kõikidel x-i, ehk c väärtustel oleva keskmise 
     hinna w(c) * L(c, 1-c) järjendina.
   """ 
-  if X is None:
+  if x is None:
     x = np.linspace(0.000,1.000,1001).tolist()
 
   y_space = np.array([])
@@ -139,22 +142,28 @@ def curve_areas(X_test, y_true, p_pred, x=None, w=default, targets=[0], feature=
   Argumendid:
     pandas.DataFrame X_test: Andmepunkti tunnused, kus iga kategooriline
       väärtus on one hot enkodeeritud.
+
     numpy.ndarray y_true: Andmepunktide tegelik väärtus.
+
     numpy.ndarray p_pred: Andmepunktidele ennustatud positiivse klassi 
       tõenäosus.
+
     list x: y_teljel olevate hindade suhted. Tavaline väärtus on 0ist 
       1ni 1000 osaks jaotatud.
+
     function w: Funktsioon, mis annab iga hindade suhte juures kaalu. Ehk
       millega korrutatkse keskmine hind iga hinna suhte juures läbi.
       Erinevad kaalud annavad kõveraid, mille alune pindala on erinev
       rangelt korralik kadu. Siin on kaasas kaalud default(c), brier(c)
       ja cross_entropy(c).
+
     list targets: List, kus on andmepunktide väärtused, mille pindalad 
       joonistatakse. 0 - tegelikult negatiivsed, 1 - tegelikult positiivsed.
+
     datapointloss.functions.Feature feature: Tunnuse klass, et eraldada erinevate
       tunnustega admepunktid. Lähemalt loe klassi kirjeldusest.
   """ 
-  if X is None:
+  if x is None:
     x = np.linspace(0.000,1.000,1001).tolist()
 
   copy = X_test.copy()
@@ -218,22 +227,27 @@ def loss_bins(y_true, p_pred, x=None, w=default, target=0, bins=100):
 
   Argumendid:
     numpy.ndarray y_true: Andmepunktide tegelik väärtus.
+
     numpy.ndarray p_pred: Andmepunktidele ennustatud positiivse klassi 
       tõenäosus.
+
     list x: y_teljel olevate hindade suhted. Tavaline väärtus on 0ist 
       1ni 1000 osaks jaotatud.
+
     function w: Funktsioon, mis annab iga hindade suhte juures kaalu. Ehk
       millega korrutatkse keskmine hind iga hinna suhte juures läbi.
       Erinevad kaalud annavad kõveraid, mille alune pindala on erinev
       rangelt korralik kadu. Siin on kaasas kaalud default(c), brier(c)
       ja cross_entropy(c).
+
     int target: Andmepunkti väärtused, mis tulpdiagrammis joonistatakse.
       0 - tegelikult negatiivsed, 1 - tegelikult positiivsed.
+      
     int bins: Mitmeks hindade suhte piirkonda andmepunktid jaotatakse 
       tulpadesse.
   """ 
 
-  if X is None:
+  if x is None:
     x = np.linspace(0.000,1.000,1001).tolist()
   
   probs = []
