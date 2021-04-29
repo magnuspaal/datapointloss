@@ -1,0 +1,9 @@
+dist/
+.eggs/
+.pytest_cache/
+build/
+data/
+datapointloss.egg-info/
+notebooks/other/
+notebooks/photos/
+venv/
